@@ -1,68 +1,78 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# character encoding declaration, often used UTF-8,
-# to support all multilingual.
-print("Salam Alykom")
+import re
+import sys
 
-# Variables declaration
-# no explicit declaration
-# just assign a value to specify the type of a variable
-age = 125 # integer
-print("type of age", type(age))
+def clean_text(text):
+    #"remove punctuation form a text"
+    #"'Error in quotation marks: the same quotation mark used to open must also be used to close. 
 
-salaire = 3.14
-print("type of salaire", type(salaire))
+    punct = "+.*/?,;'\#"
+    #When an error occurs in usage ', we must employ a different set of quotation marks "".
+    for p in punct:
+        #(:) must be placed at for 
+        text = text.replace(p,"")
+        # here forget to close " for space 
+    return text 
 
-name = "Ahmed"
-print("type of name", type(name))
-prenom ='omar'
+def tokenize(text):
+    """Convert text into tokens"""
+    #" ''Error in quotation marks we can use """ its more pratical when we leave a line 
+    return text.split( )
 
-# substitution
-s2 = "I am %s" % name 
-s3 = "I am %d old " % age
-print(s2, s3)
+def tokenize2(text):
+    """Convert text into tokens,return a list of tokens(words)"""
+    #Error in quotation marks:must use the same for open and close
+    spaces = r"\s+"
+    #Forgetting quotation marks around the regular expression 
+    words = re.split(spaces,text)# forget to import re 
+    return words
+    # declaration words not word and return must be upon def 
 
-# listes
-liste = [1, 2, 31, 4]
-print("type of ls", type(liste))
-print(liste)
+def word_freq(words):
+    """Counts
+    words and return a
+    dictionary of words
+    with
+    their occurrence"""
+    #The text is written normally, without quotation marks.
+    index={}
+    for w in words:
+        if w in index:
+            #Forgetting to plac: at the end of the condition
+            index[w] += 1
+        else:
+            #Forgetting to plac: at the end of the condition else 
+            index[w] = 1
+    return index #انشاء قاموس فارغ 
 
-# add an element
-liste.append(5)
-print(liste)
+def most_common_word(words_freq_table):
+    #Missing  (:) at the end of the line
+    """Counts words and return a dictionary of words with their"""
+    #Error in quotation marks:must use the same for open and close 
 
-# word list
-wordlist = ["I", "am", "learning", "english"]
+    frequent =""
+    #'frequent' has no assigned value
+    frequency = 0
+    for word in words_freq_table:
+        #Missing : at the end of for 
+        if words_freq_table[word] > frequency:
+            frequent = word
+            frequency = words_freq_table[word]
+    return frequent
 
-# Flows Control
-a = 15
-if a > 15:
-    # pay attention to tabs
-    print('a is greater than 15')
-elif a <= 15 and a >= 10:
-    print('a between 10 and 15')
-else:
-    print('a is less than 10')
+def read_file(filename):
+    #Missing : at the end of function 
+    'Read a text from file'
+    #error quotation mark without closing 
 
-# test if an element belongs to a list
-a = 5
-if a in liste:
-    print("a exists in list")
-
-# Loops
-for word in wordlist:
-    print(word)
-
-# Loops and tests
-# Count occurrences of a character in a string
-chaine = """ sky, oh the sky! It stretches above us, vast and endless.
-The sky is a canvas, a canvas of blue, blue like the ocean on a clear summer day.
-It's a canvas of possibilities, possibilities as vast as the sky itself."""
-
-caractere = "s"
-cpt = 0
-for c in chaine:
-    if c == caractere:
-        cpt += 1
-
-print("Char %s exists %d times" % (caractere, cpt))
+    text = ""
+    #the quotation use to open must use for close 
+    try:# missing : at the end 
+        fl = open(filename)
+        text = fl.read()
+        fl.close()  # When open a file using open(), you close it after finished by fl.close() 
+        #to avoid consuming system resources and memory
+    except:
+        print("Can't open file", filename)
+        #Error in quotation marks and 
+        sys.exit()# forget to import sys 
+    return text
